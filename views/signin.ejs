@@ -9,22 +9,29 @@
 <body>
     <%- include("./partials/navbar.ejs") %>
 
-        <div class="container mt-5">
-            <form action="/user/signin" method="post">
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <button type="submit" class="btn btn-primary">Sign In</button>
-            </form>
+        <% if (locals.error) { %>
+            <div class="alert alert-danger w-50 mx-auto mt-5" role="alert">
+                <%= locals.error %>
+            </div>
+            <%} %>
 
-        </div>
+                <div class="container mt-5">
+                    <form action="/user/signin" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                    </form>
 
-        <%- include("./partials/scripts.ejs") %>
+                </div>
+
+                <%- include("./partials/scripts.ejs") %>
 </body>
 
 </html>
