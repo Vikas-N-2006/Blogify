@@ -1,18 +1,20 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 8000;
+const PORT = process.env.PORT || 8000;
 
 const connectMongoDb = require('./connection');
 const cookieParser = require('cookie-parser');
 const { checkForAuth } = require('./middlewaress/authentication');
 const Blog = require("./models/blog");
-require('dotenv').config();
+
 
 const userRoute = require('./routes/user');
 const blogRoute = require('./routes/blog');
 
-connectMongoDb("mongodb://127.0.0.1:27017/blogDb")
+connectMongoDb(process.env.MONGO_URL)
     .then(() => {
         console.log("Connected to MongoDB successfully");
     })
@@ -43,6 +45,6 @@ app.get('/', async (req, res) => {
 
 });
 
-app.listen(port, () => {
-    console.log(`Server started at ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server started at ${PORT}`);
 })
